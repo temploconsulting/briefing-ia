@@ -1,0 +1,6 @@
+{
+  "version": 1,
+  "creado": "2026-09-03",
+  "descripcion": "Registro de historias ya reportadas. Cada entrada: id, titular, primera_vez, ultima_vez, estado (nuevo|actualizacion|repetido). Poda a 30 dias.",
+  "historias": []
+}
