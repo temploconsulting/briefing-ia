@@ -17,6 +17,7 @@ const UA = 'Mozilla/5.0 (compatible; TemploBriefingBot/1.0; +https://github.com/
 const VENTANA_DIAS = 7;
 const TIMEOUT_MS = 20000;
 const REINTENTOS = 2;
+const CONCURRENCIA = 8;
 
 // Foco: que herramientas salen, quien las usa, que esta ganando adopcion, y como
 // cambian los procesos de un profesional digital (programacion, marketing, publicidad, SEO).
@@ -52,7 +53,6 @@ const FEEDS = [
   ['insider',  'One Useful Thing',   'https://www.oneusefulthing.org/feed'],
   ['insider',  'Import AI',          'https://jack-clark.net/feed/'],
   ['insider',  'Zvi',                'https://thezvi.substack.com/feed'],
-  ['insider',  'AINews',             'https://news.smol.ai/rss.xml'],
   ['insider',  'Ben Bites',          'https://bensbites.com/feed'],
   ['insider',  'TLDR AI',            'https://tldr.tech/api/rss/ai'],
   ['insider',  'AlphaSignal',        'https://alphasignal.ai/feed.xml'],
@@ -87,21 +87,29 @@ const FEEDS = [
   ['comunidad', 'r/AI_Agents',       'https://www.reddit.com/r/AI_Agents/top/.rss?t=week'],
 
   // --- datos duros de adopcion: la vía B vive de aqui ---
-  ['datos',     'Artificial Analysis','https://artificialanalysis.ai/rss.xml'],
-  ['datos',     'HF daily papers',    'https://huggingface.co/api/daily_papers'],
+  ['datos',     'Stack Overflow blog','https://stackoverflow.blog/feed/'],
+  ['datos',     'a16z',               'https://a16z.com/feed/'],
 
   // --- prensa tecnologica, filtrada ---
   ['prensa',    'TechCrunch AI',     'https://techcrunch.com/category/artificial-intelligence/feed/'],
   ['prensa',    'The Verge AI',      'https://www.theverge.com/rss/ai-artificial-intelligence/index.xml'],
-  ['prensa',    'Ars Technica AI',   'https://arstechnica.com/ai/feed/'],
   ['prensa',    'The Decoder',       'https://the-decoder.com/feed/'],
   ['prensa',    'VentureBeat AI',    'https://venturebeat.com/category/ai/feed/'],
   ['prensa',    'MIT Tech Review',   'https://www.technologyreview.com/topic/artificial-intelligence/feed/'],
 ];
 
 const hoy = new Date();
-const fechaISO = hoy.toISOString().slice(0, 10);
-const limite = new Date(hoy.getTime() - VENTANA_DIAS * 864e5);
+
+// La fecha del corpus es la de Madrid, no la UTC: tiene que coincidir con la que
+// validar.mjs deduce del nombre del briefing, o no encuentra el corpus.
+const fechaISO = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Madrid' }).format(hoy);
+
+// Ventana anclada a la medianoche de Madrid, no al instante de ejecucion. Antes se
+// restaban 7x24h desde las 02:00 UTC, asi que el lunes se perdian las primeras horas
+// del lunes anterior — y eso no se recupera: el corpus es la unica fuente valida de
+// URLs. Se resta ademas el desfase maximo de Madrid (UTC+2): incluir una hora de mas
+// es inofensivo porque el agente filtra por fecha del hecho, perder una es definitivo.
+const limite = new Date(Date.parse(fechaISO + 'T00:00:00Z') - VENTANA_DIAS * 864e5 - 2 * 3600e3);
 
 function canonica(url) {
   try {
@@ -169,9 +177,13 @@ function parsea(xml) {
   }).filter(Boolean);
 }
 
+const espera = (ms) => new Promise((r) => setTimeout(r, ms));
+
 async function baja(url) {
   let ultimo = '';
   for (let intento = 0; intento <= REINTENTOS; intento++) {
+    // Backoff antes de reintentar. Reintentar a los 0 ms de un timeout no funciona nunca.
+    if (intento > 0) await espera(1000 * intento * intento);
     try {
       const r = await fetch(url, {
         headers: { 'User-Agent': UA, Accept: 'application/rss+xml, application/atom+xml, application/xml, text/xml, */*' },
@@ -181,7 +193,18 @@ async function baja(url) {
       // La allowlist del entorno se delata aqui: no es que la fuente este caida.
       const denegado = r.headers.get('x-deny-reason');
       if (denegado) return { ok: false, status: r.status, motivo: `red_bloqueada:${denegado}` };
-      if (!r.ok) { ultimo = `http_${r.status}`; if (r.status < 500) break; continue; }
+      if (!r.ok) {
+        ultimo = `http_${r.status}`;
+        // 429 es "vas demasiado deprisa", no "no existe": hay que esperar y repetir.
+        // Antes caia en el `< 500` y se abandonaba al primer intento.
+        if (r.status === 429) {
+          const ra = Number(r.headers.get('retry-after'));
+          await espera(Math.min(Number.isFinite(ra) && ra > 0 ? ra * 1000 : 5000, 15000));
+          continue;
+        }
+        if (r.status < 500) break;
+        continue;
+      }
       return { ok: true, status: r.status, xml: await r.text() };
     } catch (e) {
       ultimo = e.name === 'TimeoutError' ? 'timeout' : `error:${e.message.slice(0, 80)}`;
@@ -190,10 +213,21 @@ async function baja(url) {
   return { ok: false, status: 0, motivo: ultimo || 'desconocido' };
 }
 
+// Descarga por tandas. 61 peticiones a la vez saturan la salida del contenedor y
+// provocan timeouts que no son culpa de la fuente; y si caen 31, el script aborta
+// la noche entera por un problema de red propio. Con 8 en paralelo tarda unos
+// segundos mas y no se autolesiona.
+async function enTandas(lista, n, fn) {
+  const cola = [...lista];
+  await Promise.all([...Array(Math.min(n, cola.length))].map(async () => {
+    while (cola.length) await fn(cola.shift());
+  }));
+}
+
 const salud = [];
 const items = [];
 
-await Promise.all(FEEDS.map(async ([tier, nombre, url]) => {
+await enTandas(FEEDS, CONCURRENCIA, async ([tier, nombre, url]) => {
   const r = await baja(url);
   if (!r.ok) { salud.push({ tier, nombre, url, ok: false, motivo: r.motivo }); return; }
   let dentro = 0, total = 0;
@@ -201,8 +235,11 @@ await Promise.all(FEEDS.map(async ([tier, nombre, url]) => {
     total++;
     if (new Date(it.fecha_pub) >= limite) { items.push({ ...it, tier, fuente: nombre }); dentro++; }
   }
+  // Regla 15 de AGENTE.md: un feed que parsea sin ninguna entrada esta caido.
+  // Antes se contaba como vivo, asi que un feed roto inflaba el ratio del 50%.
+  if (total === 0) { salud.push({ tier, nombre, url, ok: false, motivo: 'sin_entradas' }); return; }
   salud.push({ tier, nombre, url, ok: true, items_totales: total, items_en_ventana: dentro });
-}));
+});
 
 const vivos = salud.filter((s) => s.ok).length;
 const bloqueados = salud.filter((s) => !s.ok && s.motivo?.startsWith('red_bloqueada')).length;

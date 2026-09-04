@@ -42,13 +42,26 @@ const fechaBriefing = ruta.match(/(\d{4}-\d{2}-\d{2})/)?.[1] ?? new Date().toISO
 const estado = await leerJSON('estado/estado.json', { historias: [] });
 const glosario = await leerJSON('estado/glosario.json', { terminos: [] });
 
-// --- corpus de la noche: unica fuente valida de URLs ---
+// --- corpus de la VENTANA: unica fuente valida de URLs ---
+// No solo el de esta noche. En modo vigilancia los candidatos se acumulan durante
+// seis dias: su URL esta en el corpus del dia en que se leyo, y para el lunes la
+// mayoria de feeds ya no la listan. Leer un solo dia tiraba la semana entera.
+const diasVentana = [...Array(VENTANA_DIAS + 1).keys()].map((i) =>
+  new Date(Date.parse(fechaBriefing + 'T00:00:00Z') - i * 864e5).toISOString().slice(0, 10));
+
 let corpus = [];
-try {
-  corpus = (await readFile(`estado/corpus/${fechaBriefing}.jsonl`, 'utf8'))
-    .split('\n').filter(Boolean).map((l) => JSON.parse(l));
-} catch {
-  fallo(`no existe estado/corpus/${fechaBriefing}.jsonl — no se puede verificar ninguna URL`);
+let diasConCorpus = 0;
+for (const dia of diasVentana) {
+  try {
+    corpus.push(...(await readFile(`estado/corpus/${dia}.jsonl`, 'utf8'))
+      .split('\n').filter(Boolean).map((l) => JSON.parse(l)));
+    diasConCorpus++;
+  } catch { /* un dia sin corpus no es un fallo: esa noche pudo no ejecutarse */ }
+}
+if (!diasConCorpus) {
+  fallo(`no hay ningun corpus en los ultimos ${VENTANA_DIAS} dias — no se puede verificar ninguna URL`);
+} else if (diasConCorpus < 3) {
+  aviso(`solo ${diasConCorpus} dia(s) de corpus en la ventana: la vigilancia no esta corriendo`);
 }
 const urlsCorpus = new Set(corpus.flatMap((c) => [c.url, c.url_original].filter(Boolean).map((u) => u.toLowerCase())));
 const dominiosCorpus = new Set([...urlsCorpus].map((u) => { try { return new URL(u).hostname.replace(/^www\./, ''); } catch { return null; } }).filter(Boolean));
@@ -93,8 +106,12 @@ for (const url of new Set((html.match(/(?:href|src)=["'](https?:\/\/[^"']+)["']/
   if (propias.test(host)) continue;
   if (!enListaBlanca(host)) { fallo(`dominio fuera de dominios.txt: ${host} (${url})`); continue; }
   if (urlsCorpus.has(url.toLowerCase())) continue;
-  if (dominiosCorpus.has(host)) { aviso(`URL no exacta pero de dominio leido (${host}): ${url}`); continue; }
-  fallo(`URL no presente en el corpus de esta noche: ${url}`);
+  // Esto era un aviso cuando el dominio se habia leido esa noche, y un aviso no bloquea.
+  // Era el agujero exacto del briefing piloto: una URL inventada de un dominio conocido
+  // pasaba el validador. Ahora bloquea siempre; el dominio leido solo mejora el mensaje.
+  fallo(dominiosCorpus.has(host)
+    ? `URL no presente en el corpus (${host} si se leyo, esta URL no: probable invencion): ${url}`
+    : `URL no presente en el corpus de la ventana: ${url}`);
 }
 
 // ============ 2b · nada ejecutable en la pagina ============
@@ -163,10 +180,58 @@ else {
 }
 
 // ============ 7 · latido de hoy ============
+// Un solo nombre para este fichero: estado/latido.jsonl. Antes el codigo leia uno,
+// el mensaje nombraba otro y en el repositorio habia un tercero, asi que este
+// bloque fallaba siempre y no se publicaba nunca.
 try {
   const latido = await readFile('estado/latido.jsonl', 'utf8');
-  if (!latido.includes(fechaBriefing)) fallo(`latido.log no tiene ninguna linea de ${fechaBriefing}`);
+  if (!latido.includes(fechaBriefing)) fallo(`estado/latido.jsonl no tiene ninguna linea de ${fechaBriefing}`);
 } catch { fallo('no existe estado/latido.jsonl'); }
+
+// ============ 8 · regla 13: nada del contexto interno se publica en bruto ============
+// Estaba marcada [V] en AGENTE.md y no la comprobaba nadie. Comprueba que ninguna
+// frase larga de contexto_negocio.json aparezca literal en el briefing.
+const contexto = await leerJSON('contexto_negocio.json', null);
+if (contexto) {
+  // Comparar en crudo no sirve: en la pagina el texto ya paso por el escapado, asi que
+  // una comilla se convirtio en &#39; y la frase deja de coincidir consigo misma. Se
+  // normalizan los dos lados a minusculas, sin entidades y sin puntuacion.
+  const norm = (s) => String(s).toLowerCase()
+    .replace(/&(?:amp|lt|gt|quot|#39|nbsp);/g, ' ')
+    .replace(/[^a-z0-9áéíóúüñç ]+/g, ' ')
+    .replace(/\s+/g, ' ').trim();
+
+  const pagina = norm(html.replace(/<[^>]+>/g, ' '));
+  const frases = [];
+  (function recorre(v) {
+    if (typeof v === 'string') { const n = norm(v); if (n.length >= 40) frases.push(n); }
+    else if (Array.isArray(v)) v.forEach(recorre);
+    else if (v && typeof v === 'object') Object.values(v).forEach(recorre);
+  })(contexto);
+  for (const f of new Set(frases)) {
+    if (pagina.includes(f)) fallo(`frase literal de contexto_negocio.json en el briefing: "${f.slice(0, 70)}..."`);
+  }
+} else {
+  aviso('no se pudo leer contexto_negocio.json: no se comprueba la fuga de contexto interno');
+}
+
+// ============ 9 · el markdown, que es lo que se entrega en Drive ============
+// El HTML se queda en el repositorio; el .md es el que ve una persona. Validar
+// solo el HTML dejaba sin revisar justo el fichero que se publica.
+const rutaMd = ruta.replace(/\.html$/, '.md');
+if (!existsSync(rutaMd)) fallo(`no existe ${rutaMd}: es el fichero que se entrega en Drive`);
+else {
+  const md = await readFile(rutaMd, 'utf8');
+  const itemsMd = (md.match(/^### \d\d · /gm) || []).length;
+  if (itemsMd !== items.length) fallo(`el markdown tiene ${itemsMd} items y el HTML ${items.length}: no son el mismo briefing`);
+  for (const url of new Set((md.match(/\]\((https?:\/\/[^)]+)\)/g) || []).map((m) => m.slice(2, -1)))) {
+    let host;
+    try { host = new URL(url).hostname.toLowerCase().replace(/^www\./, ''); } catch { fallo(`URL malformada en el markdown: ${url}`); continue; }
+    if (propias.test(host)) continue;
+    if (!enListaBlanca(host)) fallo(`markdown: dominio fuera de dominios.txt: ${host}`);
+    else if (!urlsCorpus.has(url.toLowerCase())) fallo(`markdown: URL no presente en el corpus: ${url}`);
+  }
+}
 
 // ============ salida ============
 for (const a of avisos) console.log(`  aviso  ${a}`);

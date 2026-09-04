@@ -67,8 +67,13 @@ if (!ESTADOS.includes(b.estado)) errores.push(`"estado" debe ser uno de: ${ESTAD
 if (b.estado !== 'fuentes_caidas' && !b.titular) errores.push('falta "titular"');
 
 b.items ??= [];
-if (b.estado === 'publicado' && (b.items.length < 3 || b.items.length > 8)) {
-  errores.push(`estado "publicado" exige entre 3 y 8 items, hay ${b.items.length}. Con menos de 3, el estado es "semana_floja".`);
+// 4 a 8, igual que AGENTE.md. Antes esto decia 3 y el esquema decia otra cosa:
+// con exactamente 3 items el agente no sabia si era "publicado" o "semana_floja".
+if (b.estado === 'publicado' && (b.items.length < 4 || b.items.length > 8)) {
+  errores.push(`estado "publicado" exige entre 4 y 8 items, hay ${b.items.length}. Con menos de 4, el estado es "semana_floja".`);
+}
+if (b.estado === 'semana_floja' && (b.items.length < 1 || b.items.length > 3)) {
+  errores.push(`estado "semana_floja" lleva entre 1 y 3 items, hay ${b.items.length}. Con 4 o mas, el estado es "publicado".`);
 }
 if (b.estado === 'alerta' && b.items.length !== 1) {
   errores.push(`una alerta lleva exactamente 1 item, hay ${b.items.length}. No es un briefing corto: es un aviso.`);
@@ -170,8 +175,8 @@ ${css}</style></head><body>
   <header class="masthead">
     <div class="badges"><span class="pilot">Edicion ${E(b.edicion ?? '')}</span>${
       b.estado !== 'publicado' ? `<span class="fixed">${E(b.estado.replace(/_/g, ' '))}</span>` : ''}</div>
-    <h1>Briefing Diario de IA</h1>
-    <p class="standfirst">Briefing diario de inteligencia artificial para el equipo de Templo Consulting.</p>
+    <h1>Briefing Semanal de IA</h1>
+    <p class="standfirst">Herramientas, adopcion y formas de trabajar con IA. Para el equipo de Templo Consulting.</p>
     <div class="stamp">
       <span><b>${E(fmtFecha(b.fecha))}</b></span>
       ${b.ventana ? `<span>Ventana <b>${E(fmtFecha(b.ventana.desde))} - ${E(fmtFecha(b.ventana.hasta))}</b></span>` : ''}
@@ -181,9 +186,9 @@ ${css}</style></head><body>
 
   ${b.aviso ? `<div class="alerta"><span class="lbl">Aviso</span><p>${E(b.aviso)}</p></div>` : ''}
 
-  ${b.titular ? `<div class="lede" data-seccion="titular"><span class="kicker">Titular del dia</span><p>${E(b.titular)}</p></div><!-- /titular -->` : ''}
+  ${b.titular ? `<div class="lede" data-seccion="titular"><span class="kicker">Titular de la semana</span><p>${E(b.titular)}</p></div><!-- /titular -->` : ''}
 
-  ${seccion('items', 'Lo que importa hoy', 'por impacto', b.items.length
+  ${seccion('items', 'Lo que importa', 'por impacto', b.items.length
     ? `    <div class="items">${b.items.map(bloqueItem).join('')}</div>` : '')}
 
   ${esBriefing && b.leccion ? seccion('leccion', 'Leccion de la semana', 'un concepto que no caduca', bloqueLeccion(b.leccion)) : ''}
@@ -214,7 +219,7 @@ ${css}</style></head><body>
     (b.ids_para_feedback?.length ? `\n  <p class="src">Items de hoy: ${b.ids_para_feedback.map(E).join(' &middot; ')}. Anota "sirvio" o "sobraba" en feedback.json.</p>` : ''))}
 
   <div class="colophon">
-    Solo entra lo que cambia una decision. Un dia flojo es un briefing de dos items, no de cinco rellenos.<br>
+    Solo entra lo que cambia una decision. Una semana floja es un briefing de dos items, no de cinco rellenos.<br>
     Toda afirmacion lleva enlace a su fuente y fecha visible. Lo que no se verifica, no se publica.<br>
     Generado automaticamente. El texto de terceros se publica escapado.
   </div>
@@ -222,26 +227,71 @@ ${css}</style></head><body>
 </div></body></html>
 `;
 
-// ---------- markdown, para leer en el repo privado ----------
+// ---------- markdown: ESTE es el fichero que se entrega en Drive ----------
+// Tiene que llevar lo mismo que el HTML. Cuando solo llevaba items, hilos y glosario,
+// el lector recibia el briefing sin la leccion ni el analisis, que es el contenido
+// perenne y el que mas le sirve. El HTML se queda en el repositorio; esto es lo que lee.
+//
+// Los corchetes en texto de terceros rompen la sintaxis de enlace de markdown.
+const M = (s) => String(s ?? '').replace(/([[\]])/g, '\\$1');
+
+const fuentesMd = (fuentes) => {
+  const ok = (fuentes ?? []).filter((f) => dominioPermitido(f.url));
+  if (!ok.length) return 'Fuentes: _ninguna con dominio permitido_';
+  return `Fuentes: ${ok.map((f) => `[${M(f.titulo)}](${f.url})`).join(' · ')}`;
+};
+
 const md = [
-  `# Briefing IA · ${fmtFecha(b.fecha)}`, '',
-  b.aviso ? `> **Aviso:** ${b.aviso}\n` : '',
-  b.titular ? `**${b.titular}**\n` : '',
+  `# Briefing IA · ${fmtFecha(b.fecha)}`,
+  `*Edicion ${b.edicion ?? '—'}${b.ventana ? ` · ventana ${fmtFecha(b.ventana.desde)} a ${fmtFecha(b.ventana.hasta)}` : ''}${b.estado !== 'publicado' ? ` · ${b.estado.replace(/_/g, ' ')}` : ''}*`, '',
+  b.aviso ? `> **Aviso.** ${b.aviso}\n` : null,
+  b.motivo_urgencia ? `> **Motivo de la alerta.** ${b.motivo_urgencia}\n` : null,
+  b.titular ? `**${b.titular}**\n` : null,
+
+  b.items.length ? '## Lo que importa' : null,
   ...b.items.flatMap((it, i) => [
-    `## ${String(i + 1).padStart(2, '0')} · ${it.titulo}`,
-    `*${fmtFecha(it.fecha_hecho)}${it.etiquetas?.length ? ' · ' + it.etiquetas.join(', ') : ''}*`, '',
+    `### ${String(i + 1).padStart(2, '0')} · ${it.titulo}`,
+    `*${fmtFecha(it.fecha_hecho)} · via ${it.via}${it.nivel ? ' · ' + it.nivel : ''}${it.etiquetas?.length ? ' · ' + it.etiquetas.join(', ') : ''}*`, '',
     ...(it.situarte ?? []).map((p) => `> ${p}`), (it.situarte?.length ? '' : null),
     it.hecho, '',
     `**Por que importa.** ${it.por_que}`, '',
     it.ensena ? `**Lo que te ensena.** ${it.ensena}\n` : null,
     it.cuesta ? `**Cuesta dinero.** ${it.cuesta}\n` : null,
     `**Que haces tu.** ${it.que_haces}`, '',
-    it.cautela ? `⚠️ ${it.cautela}\n` : null,
-    `Fuentes: ${it.fuentes.filter((f) => dominioPermitido(f.url)).map((f) => `[${f.titulo}](${f.url})`).join(' · ')}`, '',
+    it.cautela ? `⚠️ **Cautela.** ${it.cautela}\n` : null,
+    fuentesMd(it.fuentes), '',
   ]),
-  b.hilos?.length ? '## Hilos en seguimiento\n' + b.hilos.map((h) => `- **${h.titulo}** (${h.estado}) — ${h.texto}`).join('\n') + '\n' : null,
-  b.glosario?.length ? '## Glosario\n' + b.glosario.map((g) => `- **${g.termino}** — ${g.definicion}`).join('\n') + '\n' : null,
-  b.descartados?.length ? '## Considerado y descartado\n' + b.descartados.map((d) => `- ${d.titular} — ${d.motivo}`).join('\n') + '\n' : null,
+
+  esBriefing && b.leccion ? [
+    `## Leccion de la semana`, '', `### ${b.leccion.titulo}`, '',
+    b.leccion.entrada, '',
+    b.leccion.regla ? `**La regla.** ${b.leccion.regla}\n` : null,
+    ...(b.leccion.columnas ?? []).flatMap((c) => [
+      `**${c.titulo}** — ${c.definicion}`,
+      ...(c.ejemplos ?? []).map((e) => `- ${e}`), '',
+    ]),
+    b.leccion.error_caro ? `**El error caro.** ${b.leccion.error_caro}\n` : null,
+    b.leccion.pitch ? `**Como lo cuentas a direccion.** ${b.leccion.pitch}\n` : null,
+  ].filter((l) => l !== null).join('\n') : null,
+
+  esBriefing && b.analisis ? [
+    `## Analisis de la semana`, '', `### ${b.analisis.titulo}`, '',
+    ...(b.analisis.parrafos ?? []), '',
+  ].join('\n') : null,
+
+  b.candidatos?.length ? [
+    '## Candidatos a automatizar', '',
+    '| Proceso | Tipo | Dificultad | Por donde empezar |',
+    '|---|---|---|---|',
+    ...b.candidatos.map((c) => `| ${c.proceso} | ${c.tipo} | ${c.dificultad} | ${c.primer_paso} |`), '',
+  ].join('\n') : null,
+
+  b.hilos?.length ? '## Hilos en seguimiento\n\n' + b.hilos.map((h) => `- **${h.titulo}** (${h.estado}) — ${h.texto}`).join('\n') + '\n' : null,
+  b.radar?.length ? '## Radar 90 dias\n\n' + b.radar.map((r) => `- **${r.cuando}** — ${r.texto}`).join('\n') + '\n' : null,
+  b.glosario?.length ? '## Glosario\n\n' + b.glosario.map((g) => `- **${g.termino}** — ${g.definicion}`).join('\n') + '\n' : null,
+  b.descartados?.length ? '## Considerado y descartado\n\n' + b.descartados.map((d) => `- ${d.titular} — ${d.motivo}${d.dominio ? ` (${d.dominio})` : ''}`).join('\n') + '\n' : null,
+  b.cobertura?.length ? '## Cobertura\n\n' + b.cobertura.map((c) => `- **${c.nivel}** — ${c.texto}`).join('\n') + '\n' : null,
+  b.ids_para_feedback?.length ? `---\n\nItems de hoy: ${b.ids_para_feedback.join(' · ')}.\nAnota "sirvio" o "sobraba" en cada uno.\n` : null,
 ].filter((l) => l !== null && l !== undefined).join('\n');
 
 await mkdir('briefings', { recursive: true });
@@ -252,10 +302,10 @@ await writeFile(`briefings/${b.fecha}.md`, md, 'utf8');
 const ediciones = (await readdir('briefings')).filter((f) => /^\d{4}-\d{2}-\d{2}\.html$/.test(f)).sort().reverse();
 await writeFile('index.html', `<!doctype html>
 <html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex, nofollow"><title>Briefing Diario de IA</title>
+<meta name="robots" content="noindex, nofollow"><title>Briefing Semanal de IA</title>
 <style>${css}</style></head><body><div class="sheet">
-<header class="masthead"><h1>Briefing Diario de IA</h1>
-<p class="standfirst">Briefing diario de inteligencia artificial para el equipo de Templo Consulting.</p>
+<header class="masthead"><h1>Briefing Semanal de IA</h1>
+<p class="standfirst">Herramientas, adopcion y formas de trabajar con IA. Para el equipo de Templo Consulting.</p>
 <div class="stamp"><span>Ultima edicion <b>${E(fmtFecha(b.fecha))}</b></span><span>Ediciones <b>${ediciones.length}</b></span></div></header>
 ${b.aviso ? `<div class="alerta"><span class="lbl">Aviso</span><p>${E(b.aviso)}</p></div>` : ''}
 <div class="sec-head"><h2>Historico</h2><span class="rule"></span></div>

@@ -1,0 +1,5 @@
+{
+  "_como_se_usa": "Lo escribe SOLO el lector, nunca el agente. Cada item del briefing lleva un id de 12 caracteres; anota aqui una linea por item que quieras valorar. El agente lee los ultimos 30 dias antes de filtrar, para saber que te sirvio y que sobraba. Sin esto, el criterio de entrada se evalua contra un lector imaginario.",
+  "_veredictos_validos": ["sirvio", "sobraba", "ya_lo_sabia", "no_entendi", "quiero_mas_de_esto"],
+  "veredictos": []
+}
