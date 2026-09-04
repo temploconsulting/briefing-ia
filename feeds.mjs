@@ -18,30 +18,85 @@ const VENTANA_DIAS = 7;
 const TIMEOUT_MS = 20000;
 const REINTENTOS = 2;
 
+// Foco: que herramientas salen, quien las usa, que esta ganando adopcion, y como
+// cambian los procesos de un profesional digital (programacion, marketing, publicidad, SEO).
+// NO se cubre mercado inmobiliario ni normativa de Madrid: eso es de otro agente.
 const FEEDS = [
-  // --- primarias ---
-  ['primaria', 'OpenAI',            'https://openai.com/news/rss.xml'],
-  ['primaria', 'Google DeepMind',   'https://deepmind.google/blog/rss.xml'],
-  ['primaria', 'Google AI',         'https://blog.google/technology/ai/rss/'],
-  ['primaria', 'Hugging Face',      'https://huggingface.co/blog/feed.xml'],
-  ['primaria', 'Mistral',           'https://mistral.ai/rss.xml'],
-  ['primaria', 'GitHub AI',         'https://github.blog/ai-and-ml/feed/'],
-  // espejos: Anthropic y Meta no publican RSS propio
-  ['primaria', 'Anthropic (espejo)', 'https://raw.githubusercontent.com/Olshansk/rss-feeds/refs/heads/main/feeds/feed_anthropic_news.xml'],
-  ['primaria', 'Claude (espejo)',    'https://raw.githubusercontent.com/Olshansk/rss-feeds/refs/heads/main/feeds/feed_claude.xml'],
-  ['primaria', 'Meta AI (espejo)',   'https://raw.githubusercontent.com/Olshansk/rss-feeds/refs/heads/main/feeds/feed_meta_ai.xml'],
-  // --- insiders ---
-  ['insider',  'Simon Willison',    'https://simonwillison.net/atom/everything/'],
-  ['insider',  'Zvi',               'https://thezvi.substack.com/feed'],
-  ['insider',  'Import AI',         'https://jack-clark.net/feed/'],
-  ['insider',  'One Useful Thing',  'https://www.oneusefulthing.org/feed'],
-  ['insider',  'Interconnects',     'https://www.interconnects.ai/feed'],
-  ['insider',  'Latent Space',      'https://www.latent.space/feed'],
-  ['insider',  'AINews',            'https://news.smol.ai/rss.xml'],
-  // --- comunidad y prensa ---
-  ['comunidad', 'Hacker News 300+', 'https://hnrss.org/frontpage?points=300'],
-  ['prensa',    'TechCrunch AI',    'https://techcrunch.com/category/artificial-intelligence/feed/'],
-  ['prensa',    'The Verge AI',     'https://www.theverge.com/rss/ai-artificial-intelligence/index.xml'],
+  // --- laboratorios y fabricantes: que sale y que capacidades trae ---
+  ['primaria', 'OpenAI',             'https://openai.com/news/rss.xml'],
+  ['primaria', 'Google DeepMind',    'https://deepmind.google/blog/rss.xml'],
+  ['primaria', 'Google AI',          'https://blog.google/technology/ai/rss/'],
+  ['primaria', 'Hugging Face',       'https://huggingface.co/blog/feed.xml'],
+  ['primaria', 'Mistral',            'https://mistral.ai/rss.xml'],
+  ['primaria', 'GitHub AI',          'https://github.blog/ai-and-ml/feed/'],
+  ['primaria', 'Microsoft AI',       'https://www.microsoft.com/en-us/ai/blog/feed/'],
+  ['primaria', 'NVIDIA gen AI',      'https://blogs.nvidia.com/blog/tag/generative-ai/feed/'],
+  ['primaria', 'AWS machine learning','https://aws.amazon.com/blogs/machine-learning/feed/'],
+  ['primaria', 'Together AI',        'https://www.together.ai/blog/rss.xml'],
+  ['primaria', 'Allen AI',           'https://allenai.org/rss.xml'],
+  ['primaria', 'PyTorch',            'https://pytorch.org/blog/feed.xml'],
+  // espejos horarios: estos no publican RSS propio. No son fuente primaria: desconfiar.
+  ['espejo',   'Anthropic (espejo)', 'https://raw.githubusercontent.com/Olshansk/rss-feeds/refs/heads/main/feeds/feed_anthropic_news.xml'],
+  ['espejo',   'Claude (espejo)',    'https://raw.githubusercontent.com/Olshansk/rss-feeds/refs/heads/main/feeds/feed_claude.xml'],
+  ['espejo',   'Meta AI (espejo)',   'https://raw.githubusercontent.com/Olshansk/rss-feeds/refs/heads/main/feeds/feed_meta_ai.xml'],
+  ['espejo',   'xAI (espejo)',       'https://raw.githubusercontent.com/Olshansk/rss-feeds/refs/heads/main/feeds/feed_xainews.xml'],
+  ['espejo',   'Perplexity (espejo)','https://raw.githubusercontent.com/Olshansk/rss-feeds/refs/heads/main/feeds/feed_perplexity_hub.xml'],
+  ['espejo',   'Cursor (espejo)',    'https://raw.githubusercontent.com/Olshansk/rss-feeds/refs/heads/main/feeds/feed_cursor.xml'],
+  ['espejo',   'Ollama (espejo)',    'https://raw.githubusercontent.com/Olshansk/rss-feeds/refs/heads/main/feeds/feed_ollama.xml'],
+  ['espejo',   'The Batch (espejo)', 'https://raw.githubusercontent.com/Olshansk/rss-feeds/refs/heads/main/feeds/feed_the_batch.xml'],
+
+  // --- practica: como se usa, que funciona, como cambia el trabajo ---
+  ['insider',  'Simon Willison',     'https://simonwillison.net/atom/everything/'],
+  ['insider',  'Latent Space',       'https://www.latent.space/feed'],
+  ['insider',  'Interconnects',      'https://www.interconnects.ai/feed'],
+  ['insider',  'One Useful Thing',   'https://www.oneusefulthing.org/feed'],
+  ['insider',  'Import AI',          'https://jack-clark.net/feed/'],
+  ['insider',  'Zvi',                'https://thezvi.substack.com/feed'],
+  ['insider',  'AINews',             'https://news.smol.ai/rss.xml'],
+  ['insider',  'Ben Bites',          'https://bensbites.com/feed'],
+  ['insider',  'TLDR AI',            'https://tldr.tech/api/rss/ai'],
+  ['insider',  'AlphaSignal',        'https://alphasignal.ai/feed.xml'],
+  ['insider',  'The Sequence',       'https://thesequence.substack.com/feed'],
+  ['insider',  'Last Week in AI',    'https://lastweekin.ai/feed'],
+  ['insider',  'Eugene Yan',         'https://eugeneyan.com/rss/'],
+  ['insider',  'Hamel Husain',       'https://hamel.dev/index.xml'],
+  ['insider',  'Sebastian Raschka',  'https://magazine.sebastianraschka.com/feed'],
+  ['insider',  'Lilian Weng',        'https://lilianweng.github.io/index.xml'],
+  ['insider',  'Karpathy',           'https://karpathy.github.io/feed.xml'],
+  ['insider',  'Chain of Thought',   'https://every.to/chain-of-thought/feed'],
+  ['insider',  'Pragmatic Engineer', 'https://newsletter.pragmaticengineer.com/feed'],
+
+  // --- marketing digital, publicidad y SEO con IA ---
+  ['aplicacion','Search Engine Land',    'https://searchengineland.com/feed'],
+  ['aplicacion','Search Engine Journal', 'https://www.searchenginejournal.com/feed/'],
+  ['aplicacion','Google Search Central',  'https://developers.google.com/search/blog/feed.xml'],
+  ['aplicacion','Google Ads y comercio',  'https://blog.google/products/ads-commerce/rss/'],
+  ['aplicacion','HubSpot marketing',      'https://blog.hubspot.com/marketing/rss.xml'],
+
+  // --- automatizacion y herramientas de trabajo ---
+  ['herramienta','n8n',              'https://blog.n8n.io/rss/'],
+  ['herramienta','Zapier',           'https://zapier.com/blog/feeds/latest/'],
+  ['herramienta','Notion',           'https://www.notion.so/blog/rss.xml'],
+  ['herramienta','Figma',            'https://www.figma.com/blog/feed/atom.xml'],
+  ['herramienta','Vercel',           'https://vercel.com/atom'],
+
+  // --- comunidad: lo que funciona de verdad frente a lo que funciona en la demo ---
+  ['comunidad', 'Hacker News 300+',  'https://hnrss.org/frontpage?points=300'],
+  ['comunidad', 'r/LocalLLaMA',      'https://www.reddit.com/r/LocalLLaMA/top/.rss?t=week'],
+  ['comunidad', 'r/ClaudeAI',        'https://www.reddit.com/r/ClaudeAI/top/.rss?t=week'],
+  ['comunidad', 'r/AI_Agents',       'https://www.reddit.com/r/AI_Agents/top/.rss?t=week'],
+
+  // --- datos duros de adopcion: la vía B vive de aqui ---
+  ['datos',     'Artificial Analysis','https://artificialanalysis.ai/rss.xml'],
+  ['datos',     'HF daily papers',    'https://huggingface.co/api/daily_papers'],
+
+  // --- prensa tecnologica, filtrada ---
+  ['prensa',    'TechCrunch AI',     'https://techcrunch.com/category/artificial-intelligence/feed/'],
+  ['prensa',    'The Verge AI',      'https://www.theverge.com/rss/ai-artificial-intelligence/index.xml'],
+  ['prensa',    'Ars Technica AI',   'https://arstechnica.com/ai/feed/'],
+  ['prensa',    'The Decoder',       'https://the-decoder.com/feed/'],
+  ['prensa',    'VentureBeat AI',    'https://venturebeat.com/category/ai/feed/'],
+  ['prensa',    'MIT Tech Review',   'https://www.technologyreview.com/topic/artificial-intelligence/feed/'],
 ];
 
 const hoy = new Date();
@@ -107,7 +162,9 @@ function parsea(xml) {
       url_original: url,
       titulo: etiqueta(b, 'title'),
       fecha_pub: fecha.toISOString(),
-      texto: cuerpo.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 4000),
+      // Solo el arranque del articulo. Suficiente para triar y decidir si merece
+      // abrir la fuente completa; el resto seria pagar tokens por material que se descarta.
+      texto: cuerpo.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 1200),
     };
   }).filter(Boolean);
 }

@@ -2,13 +2,18 @@
 # Una URL solo se publica si su dominio esta aqui Y aparece en el corpus de la noche.
 # Anadir un dominio es una decision humana: un commit, nunca el agente.
 # Se admite el dominio y sus subdominios.
+#
+# Foco: inteligencia artificial, herramientas, adopcion y trabajo digital.
+# NO incluye mercado inmobiliario ni normativa autonomica: eso es de otro agente.
 
-# --- laboratorios y empresas de IA ---
+# --- laboratorios y fabricantes de modelos ---
 anthropic.com
+claude.com
 openai.com
 deepmind.google
 blog.google
 google.com
+developers.google.com
 huggingface.co
 mistral.ai
 meta.com
@@ -18,23 +23,90 @@ x.ai
 deepseek.com
 qwen.ai
 alibabacloud.com
+cohere.com
+perplexity.ai
+stability.ai
 microsoft.com
 nvidia.com
+aws.amazon.com
+together.ai
+allenai.org
+pytorch.org
 github.blog
 github.com
+raw.githubusercontent.com
 
-# --- analistas e insiders ---
+# --- herramientas de trabajo y automatizacion ---
+cursor.com
+cursor.sh
+ollama.com
+replit.com
+vercel.com
+figma.com
+notion.so
+zapier.com
+make.com
+n8n.io
+blog.n8n.io
+runwayml.com
+elevenlabs.io
+midjourney.com
+canva.com
+
+# --- analistas, practica y newsletters ---
 simonwillison.net
-interconnects.ai
 latent.space
-thezvi.substack.com
+interconnects.ai
+oneusefulthing.org
 jack-clark.net
 importai.substack.com
-oneusefulthing.org
+thezvi.substack.com
+substack.com
 smol.ai
 news.smol.ai
-hamel.dev
+bensbites.com
+tldr.tech
+alphasignal.ai
+thesequence.substack.com
+lastweekin.ai
 eugeneyan.com
+hamel.dev
+sebastianraschka.com
+magazine.sebastianraschka.com
+lilianweng.github.io
+karpathy.github.io
+every.to
+newsletter.pragmaticengineer.com
+deeplearning.ai
+
+# --- marketing digital, publicidad y SEO ---
+searchengineland.com
+searchenginejournal.com
+ads.google.com
+support.google.com
+business.facebook.com
+developers.facebook.com
+tiktok.com
+ads.tiktok.com
+hubspot.com
+blog.hubspot.com
+marketingaiinstitute.com
+
+# --- datos de adopcion y comparativas ---
+artificialanalysis.ai
+ramp.com
+stackoverflow.blog
+survey.stackoverflow.co
+a16z.com
+
+# --- comunidad e investigacion ---
+news.ycombinator.com
+reddit.com
+arxiv.org
+metr.org
+lesswrong.com
+alignmentforum.org
+producthunt.com
 
 # --- prensa tecnologica ---
 techcrunch.com
@@ -45,44 +117,14 @@ wired.com
 theregister.com
 spectrum.ieee.org
 the-decoder.com
+venturebeat.com
 reuters.com
 cnbc.com
 axios.com
 ft.com
+bloomberg.com
 
-# --- comunidad e investigacion ---
-news.ycombinator.com
-arxiv.org
-metr.org
-artificialanalysis.ai
-ramp.com
-
-# --- regulacion ---
+# --- regulacion que afecta a herramientas y a un profesional digital ---
 artificialintelligenceact.eu
 europa.eu
-boe.es
 aepd.es
-cnmc.es
-
-# --- marketing, publicidad y plataformas ---
-support.google.com
-ads.google.com
-business.facebook.com
-developers.facebook.com
-tiktok.com
-searchengineland.com
-searchenginejournal.com
-hubspot.com
-
-# --- automatizacion ---
-zapier.com
-make.com
-n8n.io
-blog.n8n.io
-
-# --- sector inmobiliario espanol ---
-idealista.com
-fotocasa.es
-blogprofesional.fotocasa.es
-registradores.org
-notariado.org
