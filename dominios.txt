@@ -1,0 +1,88 @@
+# Dominios a los que el briefing puede enlazar.
+# Una URL solo se publica si su dominio esta aqui Y aparece en el corpus de la noche.
+# Anadir un dominio es una decision humana: un commit, nunca el agente.
+# Se admite el dominio y sus subdominios.
+
+# --- laboratorios y empresas de IA ---
+anthropic.com
+openai.com
+deepmind.google
+blog.google
+google.com
+huggingface.co
+mistral.ai
+meta.com
+ai.meta.com
+research.meta.ai
+x.ai
+deepseek.com
+qwen.ai
+alibabacloud.com
+microsoft.com
+nvidia.com
+github.blog
+github.com
+
+# --- analistas e insiders ---
+simonwillison.net
+interconnects.ai
+latent.space
+thezvi.substack.com
+jack-clark.net
+importai.substack.com
+oneusefulthing.org
+smol.ai
+news.smol.ai
+hamel.dev
+eugeneyan.com
+
+# --- prensa tecnologica ---
+techcrunch.com
+theverge.com
+arstechnica.com
+technologyreview.com
+wired.com
+theregister.com
+spectrum.ieee.org
+the-decoder.com
+reuters.com
+cnbc.com
+axios.com
+ft.com
+
+# --- comunidad e investigacion ---
+news.ycombinator.com
+arxiv.org
+metr.org
+artificialanalysis.ai
+ramp.com
+
+# --- regulacion ---
+artificialintelligenceact.eu
+europa.eu
+boe.es
+aepd.es
+cnmc.es
+
+# --- marketing, publicidad y plataformas ---
+support.google.com
+ads.google.com
+business.facebook.com
+developers.facebook.com
+tiktok.com
+searchengineland.com
+searchenginejournal.com
+hubspot.com
+
+# --- automatizacion ---
+zapier.com
+make.com
+n8n.io
+blog.n8n.io
+
+# --- sector inmobiliario espanol ---
+idealista.com
+fotocasa.es
+blogprofesional.fotocasa.es
+registradores.org
+notariado.org
