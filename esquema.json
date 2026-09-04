@@ -1,0 +1,53 @@
+{
+  "descripcion": "Esquema del briefing. El agente produce un fichero briefings/<fecha>.json conforme a esto. No produce HTML: lo genera render.mjs con autoescapado. Todo el texto es texto plano; cualquier etiqueta HTML se publicara escapada y visible.",
+  "campos": {
+    "fecha": "AAAA-MM-DD del briefing. Obligatorio.",
+    "ventana": { "desde": "AAAA-MM-DD", "hasta": "AAAA-MM-DD" },
+    "edicion": "numero entero correlativo",
+    "estado": "publicado (briefing del lunes, 3-8 items) | alerta (1 item urgente en dia de vigilancia) | semana_floja (menos de 3 items superan el filtro) | fuentes_caidas | incidencia",
+    "motivo_urgencia": "obligatorio si estado=alerta. Cual de los cuatro supuestos del liston cumple, citado literalmente.",
+    "titular": "un parrafo. Lo que de verdad importa esta semana. Obligatorio salvo estado=fuentes_caidas.",
+    "aviso": "texto opcional. Si existe, se muestra destacado arriba: deriva detectada, fuentes caidas, tres dias sin publicar.",
+    "items": [
+      {
+        "id": "12 hex, tal como lo calcula feeds.mjs",
+        "via": "A (cambia una decision) o B (mueve el panorama). Obligatorio. Maximo 2 de via B por briefing y nunca mas de la mitad. Una alerta nunca es de via B.",
+        "fecha_hecho": "AAAA-MM-DD. Cuando se anuncio, no cuando lo conto la prensa.",
+        "titulo": "texto plano",
+        "etiquetas": ["modelos", "regulacion", "publicidad", "agentes", "automatizacion", "seguridad", "coste", "contenido"],
+        "nivel": "primaria | insider | comunidad | prensa | regulacion",
+        "situarte": ["parrafos que explican empresa, herramienta o concepto desde cero. Vacio si no hace falta."],
+        "hecho": "que ha pasado, con sujeto, fecha y cifra. Sin adjetivos valorativos.",
+        "por_que": "por que importa para el sector y para una inmobiliaria de Madrid.",
+        "ensena": "opcional. Leccion transferible de diseno de automatizaciones.",
+        "que_haces": "algo ejecutable esta semana, con herramienta o sitio concreto.",
+        "cuesta": "opcional. Precio real desde la web del fabricante, o nota de que solo esta en comparadores.",
+        "cautela": "opcional. Nota de que lo valide un asesor, en materia legal o fiscal.",
+        "fuentes": [{ "titulo": "texto", "url": "https://..." }]
+      }
+    ],
+    "hilos": [{ "estado": "abierto | vigilancia", "titulo": "texto", "texto": "texto" }],
+    "radar": [{ "cuando": "texto corto", "texto": "texto" }],
+    "glosario": [{ "slug": "kebab-case", "termino": "texto", "definicion": "texto" }],
+    "leccion": {
+      "id": "kebab-case, se guarda en lecciones.json y no se repite en 90 dias",
+      "titulo": "texto",
+      "entrada": "texto",
+      "regla": "texto",
+      "columnas": [{ "titulo": "texto", "definicion": "texto", "ejemplos": ["texto"] }],
+      "error_caro": "texto",
+      "pitch": "una frase para contarselo a direccion"
+    },
+    "analisis": { "titulo": "texto", "parrafos": ["texto"] },
+    "candidatos": [{ "proceso": "descripcion generica", "tipo": "Flujo | Agente | Mixto", "dificultad": "Baja | Media | Alta", "primer_paso": "texto" }],
+    "cobertura": [{ "nivel": "texto", "texto": "texto" }],
+    "descartados": [{ "titular": "texto", "motivo": "texto", "dominio": "texto opcional" }],
+    "ids_para_feedback": ["ids de los items de hoy, para que el lector anote sirvio o sobraba"]
+  },
+  "reglas_de_render": [
+    "Todo texto se escapa. Una etiqueta HTML en un titular saldra visible como texto, no se ejecutara.",
+    "Solo se renderizan enlaces cuyo dominio este en dominios.txt. El resto pierde el enlace y conserva el texto.",
+    "leccion y analisis solo se renderizan en el briefing del lunes.",
+    "Una seccion con lista vacia no se renderiza. No se rellena."
+  ]
+}
