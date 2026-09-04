@@ -1,0 +1,476 @@
+{
+  "version": 1,
+  "actualizado": "2026-09-03",
+  "_como_usar": "Fichero de solo lectura para el agente. Vive en el repositorio privado y NUNCA se publica en bruto (regla dura 13). Tiene tres bloques con distinto grado de certeza: 'verificado' son hechos comprobados en fuentes abiertas y se pueden dar por ciertos; 'hipotesis' son deducciones desde fuera que el lector debe confirmar o tachar, y hasta entonces se tratan como provisionales; 'solo_tu_lo_sabes' son huecos que ninguna investigacion externa puede rellenar. Si una hipotesis se confirma, se mueve a verificado en un commit.",
+
+  "verificado": {
+    "identidad": {
+      "nombre": "Templo Consulting",
+      "actividad": "Inmobiliaria de tarifa fija en la Comunidad de Madrid",
+      "operando_desde": 2013,
+      "oficina": "C. de Santiago de Compostela 64, Fuencarral-El Pardo, 28034 Madrid. Local a pie de calle, con cita previa.",
+      "horario": "Lun-Vie 9:30-20:00, Sab 10:00-14:00",
+      "equipo": "10 personas, de las cuales 3 en marketing y comunicacion",
+      "ceo": "Juan Pedro Caro, posicionado como fuente experta en VPO y vivienda ocupada",
+      "web": "temploconsulting.com"
+    },
+
+    "modelo_de_negocio": {
+      "tarifa_principal": "2.950 EUR + IVA, tarifa unica sin tramos por precio del inmueble",
+      "cobro": "Solo a exito: se paga unicamente si la venta se cierra, tras escritura",
+      "exclusividad": "3 meses",
+      "comparativa_que_usan": "Comision tradicional del 3-5 por ciento, equivalente a 9.000-15.000 EUR",
+      "ahorro_declarado": "12.000 EUR de media por cliente",
+      "posicionamiento": "Anti-comision, no anti-servicio. No se comunican como baratos ni low cost, sino como justos y completos.",
+      "promesa_de_plazo_publicada": "Entre 7 y 15 dias para tener comprador con el piso a precio de mercado. ATENCION: contradice la tendencia verificada del mercado, ver mercado.avisos."
+    },
+
+    "servicios_y_precios": [
+      { "servicio": "Venta de vivienda", "precio": "2.950 EUR + IVA" },
+      { "servicio": "Venta de VPO", "precio": "2.950 EUR + IVA" },
+      { "servicio": "Venta de piso heredado", "precio": "2.950 EUR + IVA" },
+      { "servicio": "Venta bajo Plan 18.000", "precio": "2.950 EUR + IVA" },
+      { "servicio": "Preparar firma (cliente ya tiene comprador)", "precio": "2.950 EUR + IVA" },
+      { "servicio": "Compra asesorada", "precio": "2.950 EUR + IVA" },
+      { "servicio": "Descalificacion de VPO", "precio": "800 EUR + IVA" },
+      { "servicio": "Declaracion de herederos", "precio": "800 EUR + IVA" },
+      { "servicio": "Adjudicacion de herencia", "precio": "800 EUR + IVA" },
+      { "servicio": "Donacion de vivienda", "precio": "800 EUR + IVA" },
+      { "servicio": "Informe o autorizacion de venta de VPO", "precio": "200 EUR + IVA" },
+      { "servicio": "Primera consulta y valoracion", "precio": "Gratuita" }
+    ],
+
+    "lo_que_incluye_la_venta": "Valoracion presencial y digital, nota simple, fotografia y video profesional, home staging virtual, publicacion en portales, promocion dirigida, filtrado de interesados y gestion de visitas, negociacion, redaccion de contratos, gestion de financiacion del comprador, documentacion y acompanamiento a notaria, y calculo fiscal del neto real.",
+
+    "no_hacemos": {
+      "alquiler": "No hay linea de negocio de alquiler ni gestion de alquileres. Solo el tramite regulado de alquilar VPO.",
+      "reformas": "No es servicio propio. Solo contenido de blog.",
+      "asesoria_a_inversores_compradores": "No existe como servicio. El contenido sobre inversores esta orientado a captar vendedores, no a asesorar compradores."
+    },
+
+    "credenciales": {
+      "colegiacion": "API Colegiado num. 2187, Colegio Oficial de Agentes de la Propiedad Inmobiliaria de Madrid",
+      "registro": "Inscrito en el RAIN, Registro de Agentes Inmobiliarios de la Comunidad de Madrid, num. 001213/26",
+      "seguro_responsabilidad_civil": "600.000 EUR",
+      "seguro_de_caucion": "60.000 EUR"
+    },
+
+    "especializacion": {
+      "principal": "Vivienda protegida (VPO) y Plan 18.000. Se declaran de las pocas, si no la unica, inmobiliaria de Madrid especializada en Plan 18.000.",
+      "secundaria": "Herencias, proindivisos y donaciones",
+      "volumen_declarado_vpo": "Mas de 100 ventas de VPO al ano y mas de 800 consultas gratuitas anuales",
+      "operaciones_totales_declaradas": "Mas de 1.000 compraventas en mas de 13 anos"
+    },
+
+    "publico": {
+      "primario": "Propietario que vende. Todo el sitio esta construido alrededor de la venta.",
+      "segmentacion": "Por situacion, no por demografia: hipoteca pendiente, herencia, VPO, comprador ya encontrado, intento de venta por su cuenta, divorcio, venta urgente, deudas, mayores de 65 con exencion de IRPF, propietarios no residentes.",
+      "secundario": "Comprador, con catalogo de 56 inmuebles entre 99.000 y 1.200.000 EUR. Sin embudo comparable al del vendedor.",
+      "no_objetivo_hoy": "Inversores y arrendadores"
+    },
+
+    "activos_digitales": {
+      "blog": "496 articulos",
+      "paginas": "74",
+      "propiedades_publicadas": "56",
+      "tactica_seo_destacada": "43 articulos del tipo 'mejores inmobiliarias de [zona]' que capturan trafico de comparacion y se colocan dentro del ranking",
+      "herramientas_de_captacion": [
+        "Valoracion gratuita, con respuesta en 24-48 h",
+        "Calculadora de precio maximo legal de VPO",
+        "Calculo de impuestos y neto real antes de publicar",
+        "Simulador de ahorro tipo slider en la home",
+        "Consulta gratuita sobre herencias"
+      ],
+      "podcast": "Propio, con episodios enlazados desde la home",
+      "prensa": "El Pais, Antena 3 Espejo Publico, Telecinco TardeAR, Idealista News, El Espanol Invertia, Europa Press, Merca2, El Independiente, elDiario, Madrid Diario y otros"
+    },
+
+    "presencia_digital": {
+      "_fecha_medicion": "2026-09-03, datos obtenidos por scrape en vivo",
+      "youtube": {
+        "canal": "@TemploConsulting_Madrid",
+        "suscriptores": 227,
+        "videos": 263,
+        "visualizaciones_totales": 146664,
+        "formato": "136 videos normales con mediana de 78 visualizaciones, y 127 Shorts con mediana de 380. Los Shorts rinden unas 5 veces mas.",
+        "estado": "Activo, 17-25 subidas al mes desde marzo de 2026",
+        "temas": "Proceso de venta 57, VPO 53, mercado y precios 33, Plan 18.000 32, alquiler 26, portales 25"
+      },
+      "podcast": {
+        "nombre": "Templo Consulting: Podcast Inmobiliario",
+        "episodios": 11,
+        "estado": "PARADO desde el 2 de julio de 2026",
+        "distribucion": "Spotify y YouTube. No esta en Apple Podcasts ni iVoox. La URL /podcast-inmobiliario/ de la propia web da 404.",
+        "rendimiento": "Entre 174 y 489 visualizaciones por episodio, planas. Los episodios se han ido alargando de 29 a 58 minutos sin que suba la audiencia."
+      },
+      "redes": {
+        "instagram": "2.273 seguidores, 224 publicaciones, activo. Entre 2 y 9 likes por publicacion, comentarios casi siempre 0.",
+        "tiktok": "69 seguidores, 145 publicaciones, activo. Ver hallazgo_clave.",
+        "linkedin_empresa": "686 seguidores, activo. Techo de 5 reacciones por publicacion.",
+        "linkedin_ceo": "Juan Pedro Caro rinde entre 10 y 20 veces mas que la pagina de empresa. Un post sobre Idealista Maps logro 96 reacciones y 20 comentarios.",
+        "facebook": "Aproximadamente 1.000 seguidores. PARADO desde el 20 de agosto de 2026: la sincronizacion esta rota, no es una decision.",
+        "modelo_operativo": "Un solo pipeline: episodio de podcast, clip vertical de 15-45 segundos, y publicacion el mismo dia en Instagram, TikTok, Facebook y LinkedIn con el mismo texto. Solo en LinkedIn reescriben el copy."
+      },
+      "hallazgo_clave": "El unico contenido que ha explotado en redes es un slideshow de TikTok sobre home staging virtual con ChatGPT, publicado el 26 de junio de 2025: 14.800 reproducciones, 234 likes y 199 guardados, con solo 69 seguidores. Es unas 10 veces cualquier otra cosa que hayan publicado, y el formato apenas se usa. Es contenido sobre IA aplicada a una tarea practica del sector.",
+      "portales": {
+        "idealista": "Activo, 16 viviendas y 2 locales. Calidad de anuncios puntuada al 65 por ciento. Cartera 100 por cien venta, 0 alquiler. Rango de 125.000 a 1.200.000 EUR.",
+        "yaencontre": "Activo, 22 inmuebles",
+        "fotocasa": "SIN pagina de agencia",
+        "habitaclia": "No publican",
+        "casanet": "Perfil muerto: redirige a un dominio serbio sin relacion"
+      },
+      "resenas": {
+        "google": "4,8 sobre 5 con 683 resenas",
+        "problema": "No aparecen ni en la web ni en el schema. Falta AggregateRating pese a tener 683 resenas.",
+        "asesores_citados_por_nombre": "Fiorella Chavez y Melina Romero son los mas mencionados, seguidos de Ismael Urieta, David Londono, Charo y Juan Pedro",
+        "criticas_reales": "Una queja sustancial de lado comprador en GoWork alegando que se exigieron 6.000 EUR por adelantado para abrir negociacion. Una resena de 1 estrella en HelpMyCash por falta de respuesta durante meses. Cancelaciones de visita con poca antelacion. Calidad fotografica: 'fotos con un movil'."
+      },
+      "seo": {
+        "posiciones_verificadas": "Posicion 1 en 'vender VPO Madrid'. Top 3 en 'descalificar VPO Madrid' y en 'vender VPO por encima del precio'.",
+        "activo_principal": "Cluster VPO: 40 posts, pagina pilar y 53 videos. Nadie mas en Madrid tiene esa profundidad.",
+        "tactica_landings": "Unos 50 posts 'mejores inmobiliarias de [zona]' son en realidad landings transaccionales: el title dice 'Inmobiliaria [zona] | Vende tu piso por 2.950 EUR + IVA'. Funcionan.",
+        "cadencia_blog": "Irregular. Base de 1 a 3 posts al mes, pico atipico de 21 en julio de 2026, y practicamente parada en agosto. El esfuerzo reciente ha ido mas a reoptimizar contenido antiguo que a publicar."
+      },
+      "averias_detectadas": [
+        "La pagina /vender-piso-madrid/ muestra 'Tasa de exito 0%' por un bloque roto, y la seccion 'Clientes satisfechos' esta vacia. Es la pagina principal de conversion.",
+        "robots.txt bloquea /*/page/*, asi que unos 440 de los 496 posts dependen solo del sitemap y de enlaces desde las pilares",
+        "No hay sitemap de categorias ni taxonomia tematica indexable",
+        "Falta AggregateRating en el schema pese a 683 resenas",
+        "Un borrador 'Elementor #112596' se esta filtrando al feed RSS publico",
+        "22 posts obsoletos siguen indexados: coronavirus, Semana Santa, Hogwarts, Juego de Tronos, Los Simpson, KonMari, bitcoin"
+      ],
+      "esfuerzo_desperdiciado": [
+        "56 clips de podcast de 1 a 3 minutos subidos como videos normales, con 3 a 18 visualizaciones cada uno. No reciben distribucion de Shorts ni trafico de busqueda.",
+        "Publican mas videos normales que Shorts, cuando los Shorts rinden 5 veces mas en mediana",
+        "30 posts de alquiler sin ningun servicio de alquiler detras: trafico que no puede convertir",
+        "146.664 visualizaciones acumuladas y solo 227 suscriptores: no hay esfuerzo de conversion a suscripcion",
+        "El esfuerzo en redes se concentra en la pagina de empresa de LinkedIn, que tiene techo de 5 reacciones, mientras el perfil del CEO rinde 10-20 veces mas"
+      ],
+      "prensa_verificada": "Unas 12 menciones editoriales genuinas, concentradas en VPO y venta de inmuebles okupados: El Pais, idealista News (dos veces), elDiario, El Espanol Invertia, Merca2, Madrid Actual, Inmodiario. Aviso: las apariciones reclamadas en Antena 3 y Telecinco no enlazan a ninguna URL del canal y no se han podido verificar de forma independiente. Varias entradas de Europa Press y Merca2 de 2018 son la misma nota de prensa distribuida por Comunicae, y hay dos contenidos patrocinados listados como prensa.",
+      "huecos_de_contenido": [
+        "Ley de Vivienda, zonas tensionadas e indice de referencia: 0 URLs. Es el tema regulatorio mas buscado y Housfy ya lo posiciona.",
+        "Alquiler turistico y licencias VUT: 0 URLs. Madrid ha endurecido la licencia y muchos propietarios estan vendiendo por eso.",
+        "Subastas judiciales: 0 URLs, pese a tener servicio de perito judicial y contenido de vivienda embargada",
+        "Directiva europea de eficiencia energetica EPBD: 0 URLs",
+        "Landings 'vender piso en [distrito]': solo unas 5, frente a 50 de 'inmobiliaria [zona]'",
+        "Hipoteca inversa y nuda propiedad: 12 videos en YouTube pero casi nada escrito"
+      ]
+    },
+
+    "pila_tecnica": {
+      "cms": "WordPress con tema hello-elementor",
+      "constructor": "Elementor y Elementor Pro",
+      "portal_inmobiliario": "Plugin Estatik",
+      "formularios": "Contact Form 7 con WPCF7 Redirect",
+      "seo": "Yoast SEO v28.2, con schema Organization, WebSite, FAQPage y BreadcrumbList",
+      "rendimiento": "WP Rocket 3.23.1.1 con CDN activo",
+      "rgpd": "Complianz",
+      "whatsapp": "Plugin Creame WhatsApp Me, boton flotante",
+      "resenas": "Widget Trustindex de resenas de Google",
+      "analitica": "Google Tag Manager GTM-M5SF27T, Google Analytics 4 G-6FGE9LE0WW",
+      "publicidad": "Google Ads AW-821914917 con seguimiento de conversiones activo",
+      "no_detectado_en_la_home": "HubSpot, Meta Pixel, LinkedIn Insight, Hotjar ni herramientas de mapas de calor"
+    },
+
+    "canales_de_contacto": {
+      "telefono": "919 38 56 78",
+      "email": "info@temploconsulting.com",
+      "whatsapp": "Activo, con boton flotante",
+      "cta_dominante": "Modelo de callback: piden el telefono y llaman ellos, en lugar de pedir que el usuario llame",
+      "no_hay": "Chat en vivo, chatbot ni reserva de cita con calendario online"
+    },
+
+    "tono_de_marca": {
+      "registro": "Cercano y profesional. Tutean siempre. Frases cortas.",
+      "rasgo_distintivo": "Honestidad calculada como argumento de venta: se auto-matizan y condicionan sus propias promesas, lo que genera credibilidad.",
+      "repiten": "tarifa fija, sin comisiones, solo pagas si vendemos, a exito, sin compromiso, colegiado, de la valoracion a la firma, seguridad fiscal y juridica, real, tu situacion",
+      "evitan": "comision (salvo para hablar de competidores), jerga corporativa vacia, lenguaje de lujo, y las palabras barato o low cost"
+    },
+
+    "incoherencias_detectadas_en_su_propia_web": [
+      "Operaciones: 'mas de 1.000' en la home frente a 'mas de 900' en paginas internas",
+      "Experiencia: '+13 anos' en la home frente a 'mas de 12 anos' en interna, con fundacion en 2013",
+      "Descalificacion de VPO: 'en 45 dias, no en 6 meses' en /vpo/ frente a 'en solo 3 meses (en vez de 6)' en /nuestros-servicios/. Es una promesa comercial con dos cifras distintas."
+    ]
+  },
+
+  "mercado": {
+    "_nota": "Datos verificados en fuentes oficiales y fechadas a septiembre de 2026. El agente los usa como linea base y debe actualizarlos cuando encuentre datos mas recientes.",
+
+    "posicion_competitiva": {
+      "cuota_estimada_vpo": "Entre el 8 y el 10 por ciento de todas las transacciones de VPO de segunda mano de la Comunidad de Madrid. Estimacion orientativa: cruza una cifra autodeclarada con series del Ministerio.",
+      "tamano_relativo": "El mayor actor de tarifa fija pura verificable en Madrid",
+      "rango_de_precio_del_segmento": "Entre 1.990 y 4.000 EUR. Templo esta en el centro-alto, no es el mas barato.",
+      "competidores_tarifa_fija": [
+        { "nombre": "Inmoversion", "precio": "2.900 EUR + IVA", "nota": "Sin exclusividad. Madrid y Toledo. Pequeno." },
+        { "nombre": "De la Orden", "precio": "2.990 EUR + IVA", "nota": "Madrid capital, sur y oeste. Pequeno." },
+        { "nombre": "Properfy", "precio": "1.990 EUR hasta 1M, 12.990 EUR por encima", "nota": "Cobra la gestion de visitas aparte, +1.990 EUR. Reintroduce el tramo por precio." },
+        { "nombre": "ZeroCom", "precio": "~3.990 EUR en simulador", "nota": "No publica tarifa cerrada." },
+        { "nombre": "Housfy", "precio": "No publica precio", "nota": "Planes Basico, Integral y Premium. 4,1 sobre 5 en Trustpilot con quejas por abandono tras el cobro." }
+      ],
+      "competidores_por_volumen": "Gilmar, Engel & Volkers, Redpiso y Tecnocasa. Redpiso es el competidor real en las zonas donde esta la VPO.",
+      "amenaza_estructural": "Huspy. No compite en precio sino por el agente: 600 asesores colaboradores, mas de 4.500 operaciones en tres anos y Serie B de 59 M USD en julio de 2025. Encarece el coste de captar y retener talento comercial.",
+      "hecho_relevante": "Tiko compro Housell en 2024 y entro en concurso de acreedores en mayo de 2025. Libero cuota digital pero dejo desconfianza hacia la inmobiliaria online, que Templo neutraliza con colegiacion, RAIN, seguros y cobro solo al cierre."
+    },
+
+    "datos_clave": {
+      "precio_madrid_capital": "6.471 EUR/m2 de oferta, -1,2 por ciento mensual y +2,2 interanual (idealista, 02/09/2026)",
+      "precio_maximo_vpo_zona_a": "2.591,64 EUR/m2 util para VPO general, especial, VPP y VPPB. VPPL: 2.983,03 EUR/m2 util. Resolucion de 19/01/2026, BOCM 30/01/2026, actualizacion del +2,9 por ciento.",
+      "brecha_vpo_vs_libre": "La VPO vale menos de la mitad que el mercado libre. Por eso la descalificacion tiene un valor economico enorme para el propietario.",
+      "zonas_que_mas_suben": "Villaverde +25 por ciento, Usera +18,3, Puente de Vallecas +17,9, Carabanchel +10,8. Salamanca cae -1,9 y Retiro -0,5. La revalorizacion esta ocurriendo donde esta el parque protegido.",
+      "volumen_vpo_segunda_mano": "Aproximadamente 1.100-1.200 operaciones al ano en toda la Comunidad. Mercado pequeno.",
+      "tendencia_vpo": "Tras tres anos de caida (532, 408, 323 operaciones trimestrales), repunta un +22,5 por ciento en el 1T 2026. Calificaciones provisionales +368,3 por ciento.",
+      "tiempo_medio_de_venta": "Se ha triplicado, de 2-3 semanas a 6-9 semanas (Federacion Nacional de Asociaciones Inmobiliarias, julio 2026)",
+      "oferta_en_madrid": "Crece un 17 por ciento en la capital mientras cae un 10 por ciento en Espana. Mas stock compitiendo y menos contactos por anuncio.",
+      "euribor": "2,954 por ciento al cierre de agosto de 2026, maximo anual y subiendo. Cualquier discurso basado en que los tipos van a bajar esta desactualizado.",
+      "comprador_extranjero": "15,98 por ciento de las operaciones nacionales en el 2T 2026, maximo historico"
+    },
+
+    "normativa_vigente": {
+      "vpo_marco": "Decreto 74/2009 de la Comunidad de Madrid, aun vigente. Hay un decreto sustitutorio en tramitacion con borrador de 13/03/2026, sin confirmacion de aprobacion.",
+      "ley_2_2026": "De 11 de junio, medidas urgentes para incrementar la oferta de vivienda protegida. Permite convertir parcelas terciarias en protegidas y anade +20 por ciento de edificabilidad y +30 de densidad.",
+      "descalificacion": "Minimo 15 anos desde la calificacion definitiva. Resolucion en maximo 5 meses con silencio positivo.",
+      "rdl_8_2026": "DEROGADO. El Congreso no lo convalido el 28/04/2026. Se vuelve a IPC/IRAV. Medio internet inmobiliario espanol sigue publicando el tope del 2 por ciento como vigente: es un error de contenido muy extendido.",
+      "zonas_tensionadas": "Madrid no las ha declarado y mantiene esa posicion.",
+      "rain": "Hoy voluntario. La Comunidad anuncio el 29/06/2026 que impulsara hacerlo obligatorio, con caucion minima de 60.000 EUR. Templo ya cumple: es una barrera regulatoria a su favor.",
+      "impuesto_100_por_ciento_no_residentes": "NO existe. Se admitio a tramite en 2025 pero nunca se voto. Cualquier contenido que lo de por vigente es falso."
+    },
+
+    "avisos": [
+      "La promesa publicada de venta en 7-15 dias contradice la tendencia verificada del mercado, con tiempo medio triplicado a 6-9 semanas. Merece revision.",
+      "La tarifa fija no alinea incentivos con el precio de venta, solo con el cierre: se cobra lo mismo a 280.000 que a 320.000. Es mas honesto reconocerlo y apoyar el argumento en reputacion.",
+      "La economia del modelo se tensa: mismo ingreso por operacion, mas esfuerzo por operacion, y presion de Huspy sobre el coste del talento comercial.",
+      "Con tarifa unica, el inmueble caro subvenciona al barato dentro de la cartera. Sostenible mientras la mezcla se mantenga."
+    ],
+
+    "oportunidades_identificadas": [
+      "Profundizar en VPO antes que diversificar. Es donde hay dominio verificable, el nicho acaba de repuntar y la regulacion juega a favor.",
+      "Tramites sueltos de VPO vendidos B2B a otras agencias. Ingreso sin coste de captacion y, sobre todo, que no depende de que la venta se cierre: es el antidoto directo a la tension economica del modelo.",
+      "Herencias y proindivisos con precio cerrado publicado. Ningun especialista de Madrid publica precio. Pendiente de medir el tamano del mercado antes de invertir.",
+      "Corredor sur-este de Madrid: Villaverde, Vallecas, Usera, Carabanchel. Donde mas sube el precio y donde esta la VPO.",
+      "Contenido normativo actualizado. La derogacion del RDL 8/2026 y el futuro decreto de VPO dejan obsoleto mucho contenido ajeno.",
+      "De los tres servicios que no tienen, el unico que encaja sin montar operativa nueva es la asesoria a inversores compradores. Alquiler encaja mal salvo VPO. Reformas es alto riesgo de marca."
+    ]
+  },
+
+  "normativa_de_nicho": {
+    "_nota": "Analisis sobre textos legales y fuentes oficiales, 3 de septiembre de 2026. PENDIENTE DE VALIDACION POR EL EQUIPO DE TEMPLO, que tiene experiencia real de casos cerrados y sabe mas que cualquier analisis externo. Hasta que Alberto lo confirme o lo corrija, el agente lo trata como provisional.",
+
+    "descalificacion_matiz_critico": {
+      "hallazgo": "Segun el articulo 10.3 del Decreto 74/2009, las viviendas calificadas bajo ese decreto NO pueden descalificarse voluntariamente nunca: las limitaciones se extinguen solo por transcurso del plazo de 15 anos. La descalificacion voluntaria a los 15 anos seria la regla del Decreto 11/2005 (art. 8.2.b), que ademas tiene 20 anos de proteccion para venta. Las VPO de promocion publica del RDL 31/1978 no se descalifican en ningun caso (D.A. 2a.3).",
+      "por_que_importa": "Templo vende descalificacion de VPO por 800 EUR + IVA con promesa de 45 dias. Si el matiz es correcto, hay parte del parque a la que el servicio no aplica.",
+      "plazos_oficiales": "Resolucion en maximo 5 meses, silencio desestimatorio, tasa de 55,58 EUR. Requisitos: plazo minimo cumplido, sin perjuicio a terceros, devolucion de ayudas con intereses, y prestamo cualificado amortizado o novado.",
+      "estado": "PENDIENTE de que el equipo lo confirme o lo desmienta"
+    },
+
+    "correcciones_a_creencias_extendidas": [
+      "No existe derecho general de tanteo y retracto de la Comunidad sobre ventas de VPP en Madrid. Solo un retracto sancionador (art. 11.2 Ley 9/2003, 3 meses desde firmeza) y el de la EMVS sobre viviendas que ella adjudico.",
+      "La bonificacion del Impuesto de Sucesiones para el Grupo III en Madrid es del 50 por ciento desde el 1 de julio de 2025 (Ley 2/2025), no del 25. Y no procede de ninguna Ley 12/2023.",
+      "La plusvalia municipal de Madrid tiene cuatro tramos segun valor catastral del suelo: 95, 85, 70 y 40 por ciento. La tabla antigua de 95/75 que aun circula es incorrecta.",
+      "En segunda transmision se aplica la tabla de precios vigente el dia de la venta, no el precio de compra actualizado por IPC. Excepcion: con ayudas del RD 801/2005 rige Va = [Vi + (Vi x IPC/100)] x 1,5.",
+      "La herencia no tributa por ITP sino por el Impuesto de Sucesiones. El ITP del 6 por ciento lo paga el comprador en la venta posterior."
+    ],
+
+    "novedad_del_2_septiembre_2026": "Mi Primera Vivienda ampliado: aval publico hasta el 100 por cien de financiacion para menores de 40 anos, 95 entre 40 y 45, y 90 entre 45 y 50. Precio maximo de vivienda sube de 390.000 a 425.000 EUR. Dotacion de 25 millones para 2026. 8.309 madrilenos han accedido desde 2022. La orden que lo instrumenta esta pendiente de publicacion en BOCM.",
+
+    "nuevo_decreto_vpp": "NO APROBADO a 3 de septiembre de 2026. Ultima fase documentada: audiencia publica del 17 de marzo al 8 de abril de 2026. Derogaria expresamente el Decreto 74/2009 e introduciria 10 anos de empadronamiento en la Comunidad para venta o uso propio, y proteccion indefinida para las VPP de titularidad de la Comunidad. Exceptua expresamente la herencia de la autorizacion previa. Es la senal numero uno a vigilar.",
+
+    "volumen_herencias": {
+      "viviendas_heredadas_madrid_2025": 23789,
+      "peso_sobre_transmisiones": "17,6 por ciento de todas las viviendas transmitidas en la Comunidad de Madrid",
+      "primer_semestre_2026": "12.612 viviendas, un 5,1 por ciento mas que el mismo periodo de 2025",
+      "comparacion": "Es un mercado unas veinte veces mayor que el de VPO de segunda mano, que ronda las 1.100-1.200 operaciones anuales",
+      "fuente": "INE, Estadistica de Transmisiones de Derechos de la Propiedad",
+      "oferta": "Fotocasa Research estima que las viviendas heredadas son el 16 por ciento de la oferta total del mercado espanol y que los herederos son el 23 por ciento de quienes ofertan en compraventa. Metodologia no publicada: usar con cautela."
+    },
+
+    "parque_vpo_madrid": "No hay cifra oficial publicada. La mejor estimacion con metodologia publica es de Civio (21/05/2026): 282.300 viviendas protegidas construidas en Madrid entre 1991 y 2025, de las que entre 178.500 y 203.000 seguirian en plazo de proteccion al cierre de 2025, y mas de 48.100 ya descalificadas anticipadamente."
+  },
+
+  "competencia_digital": {
+    "_fecha_medicion": "2026-09-03, perfiles scrapeados y SERPs capturadas en vivo",
+
+    "posiciones_en_google_verificadas": {
+      "vender vivienda protegida Madrid": "Templo en posicion 2, solo por detras de comunidad.madrid. Ademas un video suyo de YouTube aparece en la 5.",
+      "vender piso Madrid sin comision": "Templo en posicion 3",
+      "inmobiliaria sin comisiones Madrid": "Templo en posicion 3. Gana Inmoversion.",
+      "inmobiliaria tarifa fija Madrid": "Templo NO aparece en el top 11. Ganan Grupo Marsapi, Inmoversion, Properfy y De la Orden."
+    },
+
+    "aeo_hallazgo_critico": "En 'vender piso Madrid sin comision', el resumen con IA de Google CITA A TEMPLO EL PRIMERO Y CON PRECIO. En la consulta contigua 'inmobiliaria sin comisiones Madrid' NO lo menciona pese a estar en posicion 3 organica: cita a Inmoversion, De la Orden, Properfy y Housfy. Es un hueco de AEO concreto y corregible en semanas.",
+
+    "territorio_libre": "NINGUNO de los aproximadamente 22 actores analizados comunica home staging virtual con IA como diferencial de servicio. Y el mejor contenido historico de Templo en redes es exactamente eso: un slideshow de TikTok con un prompt de ChatGPT para redecorar una habitacion, 14.800 reproducciones con 69 seguidores. El angulo esta demostrado y el territorio esta vacio.",
+
+    "competidores_muertos": "Housell (dominio revendido a spam), Tiko (caido), Clicpiso (absorbido por Clikalia), Propertista (dominio en venta) y Cliventa (muerto desde 2019) siguen generando busquedas de marca. Templo ya tiene un articulo de 'Housell alternativas' que funciona: es replicable a los otros cuatro.",
+
+    "ventana_abierta": "El canal de YouTube de Housfy lleva dormido desde julio de 2025 con 2.830 suscriptores, tras construir el mejor catalogo educativo del sector. En el segmento de tarifa fija, Templo es hoy el UNICO que publica video educativo con regularidad, a razon de 2-3 por semana.",
+
+    "escala_comparada": {
+      "youtube": "Templo 227 suscriptores. Housfy 2.830 (dormido), Tecnocasa 813, Redpiso 775, Properfy 50. Los portales juegan otra liga: Fotocasa 18.200, idealista 17.400.",
+      "instagram": "Templo 2.273. Housfy 14.162, Redpiso 7.404, Properfy 2.155, De la Orden 131. El problema real no es el numero sino el engagement: 4-7 likes sobre 2.273 seguidores apunta a base envejecida o de baja calidad.",
+      "tiktok": "Templo 69 seguidores pero 1.385 likes. Housfy 1.153 seguidores. De la Orden tiene la cuenta creada y vacia."
+    },
+
+    "quien_usa_ia_y_como": {
+      "fotocasa": "El mas ruidoso con diferencia. Fotocasa Brain (asistente IA, 34.000 consultas su primer ano), busqueda por voz con IA, app en ChatGPT desde abril de 2026, y campana de television con Barbie y Mattel donde Barbie dicta requisitos por voz y se convierten en filtros.",
+      "idealista": "Descripciones de anuncios con IA, valoracion automatica que revalua cada anuncio cada 24 horas, y app en ChatGPT desde marzo de 2026. Comunicacion sobria.",
+      "housfy": "Housfy Connect con Big Data, IA para filtrar inquilinos, e imagenes de blog generadas con IA con aviso explicito. Contradiccion deliberada e inteligente: usan Big Data donde les da ventaja y DESACREDITAN la valoracion automatica donde comoditizaria su servicio.",
+      "redpiso": "Unico tradicional que comunica IA como accion de marca: un cortometraje hecho con IA en junio de 2026, y un episodio de podcast sobre Big Data e IA que es su mejor pieza con 10.441 visualizaciones.",
+      "nadie_mas": "Properfy, Clikalia, Melibero, Zerocom, De la Orden, Doctor Property, Gilmar, Look and Find, Comprarcasa, Tecnocasa, Century 21, RE/MAX, Alfa y donpiso no comunican IA en absoluto."
+    },
+
+    "lo_que_no_tenemos_y_los_buenos_si": "Ningun activo de dato propio: ni informe, ni indice, ni estudio recurrente. Engel & Volkers, Fotocasa Research, Tecnocasa con la Universidad Pompeu Fabra, idealista y Gilmar si lo tienen, y es lo que genera enlaces y citas de medios de forma automatica. Engel & Volkers ademas pone muro de captacion de datos en la descarga: es una maquina de leads, no branding.",
+
+    "benchmark_a_estudiar": "Doctor Property, en Zaragoza. 101 URLs organizadas en silos por intencion, plenamente activo en 2026, domina fiscalidad de la venta y casuistica compleja, y tiene cinco piezas de VPO. Es el modelo mas parecido a lo que Templo deberia ser, y esta en otra provincia: no compite.",
+
+    "competidor_subestimado": "Inmoversion. Gana la posicion 1 en 'inmobiliaria sin comisiones Madrid', tiene pagina profesional posicionando en idealista y ha colocado notas de prensa. Es el competidor madrileno mas subestimado.",
+
+    "correcciones_de_datos": "idealista NO es de EQT: Cinven compro el 70 por ciento en 2024 por 2.925 millones, EQT se quedo con el 18. La venta de Adevinta Espana a EQT (Fotocasa, Habitaclia, Milanuncios, InfoJobs) se anuncio en julio de 2025 pero NO se ha podido confirmar su cierre."
+  },
+
+  "senales_a_vigilar": [
+    "Aprobacion del decreto que sustituira al Decreto 74/2009 de vivienda protegida en Madrid",
+    "Tramitacion parlamentaria del RAIN obligatorio en la Comunidad de Madrid",
+    "Resolucion anual de precios maximos de VPO, que se publica en el BOCM cada enero",
+    "Cambios en el Euribor y en las condiciones hipotecarias",
+    "Movimientos de Huspy, Housfy y otros actores digitales en Madrid",
+    "Cambios en las politicas de Idealista y Fotocasa que afecten a la publicacion de anuncios",
+    "Regulacion europea o espanola de IA que afecte a fotografia inmobiliaria, home staging virtual o chatbots",
+    "Cambios en Google Ads y en la busqueda que afecten a la captacion de vendedores",
+    "Herramientas de IA aplicables a valoracion, redaccion de fichas, cualificacion de leads o produccion de video"
+  ],
+
+  "procesos_y_operativa": {
+    "_fuente": "Dossieres comerciales 2026 y mapas de Digital Touchpoints facilitados por Alberto el 4 de septiembre de 2026. Esto es documentacion interna: prevalece sobre lo deducido de la web.",
+
+    "recorridos_de_cliente": {
+      "_nota": "Seis recorridos mapeados, todos con las mismas cinco fases: Descubrimiento, Consideracion, Servicio, Retencion, Promocion.",
+      "mapeados": ["Vender piso (B2C)", "Vender VPO (B2C)", "Descalificacion (B2C)", "Descalificacion (B2B)", "Informe o autorizacion de venta (B2C)", "Herencia (B2C)"],
+      "descubrimiento": "SEO y blog, publicidad online (SEM y META), buzoneo en papel, resenas de antiguos vendedores en Google, recomendacion, captacion en Idealista, oficina fisica",
+      "consideracion": "Consulta gratuita por telefono o WhatsApp, dossier por email, valoracion online, valoracion in situ, calculo del VMLV en el caso de VPO, remarketing en redes",
+      "servicio": "Anuncio en Idealista y web, redaccion de documentacion por correo, visitas (filtro de visitas en VPO), y rastro digital",
+      "que_es_el_rastro_digital": "Remarketing con campanas Performance Max de Google, impactando a personas que a priori ya mostraban interes en cosas del sector inmobiliario. ATENCION: Alberto lo describe en pasado ('que haciamos antes'), asi que puede estar discontinuado aunque siga apareciendo en el mapa de touchpoints. Confirmar si sigue activo.",
+      "retencion": "Marcado como vendido en la web, documentacion de rebaja o rendimiento por email, informacion despues de cada visita por llamada o WhatsApp",
+      "promocion": "Resena del servicio en Google y boca a boca",
+      "hallazgo_1": "EXISTE un recorrido B2B para descalificacion, ya mapeado. Coincide con la oportunidad que identifico el analisis de mercado: vender tramites de VPO a otras agencias.",
+      "hallazgo_2": "El recorrido de HERENCIA es el mas pobre de los seis: sin publicidad de pago, sin buzoneo, sin valoracion, sin remarketing. Solo SEO, recomendacion, consulta gratuita y dossier. Es el segundo eje declarado del negocio y el embudo menos desarrollado, en un mercado veinte veces mayor que el de VPO.",
+      "hallazgo_3": "El buzoneo en papel es un canal de captacion activo que no aparece en ninguna parte de la web ni del analisis digital."
+    },
+
+    "catalogo_completo_con_precios": {
+      "_nota": "Precios de los dossieres comerciales 2026. Mas granular que lo publicado en la web.",
+      "servicios_principales_2950_mas_iva": ["Venta de vivienda", "Venta de VPO", "Venta de piso heredado", "Venta bajo Plan 18.000", "Preparar firma (cliente ya tiene comprador)", "Compra asesorada", "Cierre de compraventa lado vendedor", "Cierre de compraventa lado comprador"],
+      "tramites": {
+        "certificado_eficiencia_energetica": "100 EUR + IVA",
+        "plano_del_inmueble": "100 EUR + IVA",
+        "plano_mas_certificado": "150 EUR + IVA",
+        "cancelacion_de_carga_nota_simple": "200 EUR + IVA",
+        "autorizacion_o_informe_de_venta": "200 EUR + IVA mas la tasa 030 de 55,58 EUR",
+        "descalificacion_voluntaria": "800 EUR + IVA",
+        "declaracion_de_herederos": "800 EUR + IVA",
+        "adjudicacion_de_herencia": "800 EUR + IVA",
+        "donacion_de_vivienda": "800 EUR + IVA"
+      },
+      "no_incluido": "La tasacion no esta incluida en los honorarios. Trabajan con sociedades de tasacion homologadas por el Banco de Espana.",
+
+      "modelo_de_cobro": {
+        "_confirmado_por_alberto": "4 de septiembre de 2026",
+        "venta_de_inmueble": "SOLO SE COBRA SI SE VENDE. Sin pagos por adelantado, sin fraccionar. Aplica igual a VPO, vivienda libre y cualquier tipologia. Es el pilar del modelo y no admite matices.",
+        "descalificacion_y_autorizacion_o_informe": "SE COBRAN POR ADELANTADO. Son tramites, no intermediacion: el trabajo se hace y se entrega con independencia de que luego haya venta.",
+        "devolucion_de_ayudas_en_la_descalificacion": "CORRE POR CUENTA DEL CLIENTE. Los 800 EUR + IVA son exclusivamente por la gestion del tramite, nunca incluyen el importe de las ayudas que haya que reintegrar a la administracion. Es una distincion critica al explicar el precio: el cliente puede tener que devolver una cantidad muy superior a los honorarios.",
+        "cierre_de_compraventa": "Servicio APARTE, con su propio dossier. Modelo de cobro pendiente de confirmar por Alberto."
+      }
+    },
+
+    "servicio_de_cierre_de_compraventa": {
+      "_nota": "Es un servicio distinto de la intermediacion, y conviene no confundirlos. Aqui no se capta comprador ni se comercializa el inmueble: solo se prepara y asegura la operacion que las partes ya han acordado.",
+      "quien_lo_contrata": [
+        "Un vendedor que YA tiene comprador y quiere que un profesional se encargue de preparar el contrato y llevarlo a escritura publica, sin tener que hacer la gestion el mismo",
+        "Un comprador que compra a un particular y quiere preparar la documentacion con profesionales para que no haya fallos y no se retrase la escritura publica"
+      ],
+      "que_resuelve": "Evita errores documentales y retrasos en notaria en operaciones entre particulares, donde no hay agencia detras que controle el expediente.",
+      "modelo_de_cobro": "Pendiente de confirmar. El dossier menciona honorarios fraccionados, pero Alberto debe verificarlo."
+    },
+
+    "plazos_declarados": {
+      "autorizacion_de_venta": "21 dias habiles, en ocasiones reducido a una semana",
+      "informe_de_venta": "15 dias habiles",
+      "descalificacion": "Aproximadamente 45 dias habiles, frente a los hasta 6 meses que puede tardar la administracion",
+      "cancelacion_de_la_anotacion_de_vpo_en_el_registro": "Maximo 15 dias habiles desde su presentacion",
+      "valoracion": "El precio real en 24-48 horas"
+    },
+
+    "proceso_venta_vpo_10_pasos": [
+      "1. Analisis integral: verificacion ante la Direccion General de Vivienda de que el inmueble cumple los requisitos legales de transmision",
+      "2. Calculo del Valor Maximo Legal de Venta (VMLV)",
+      "3. Analisis de la situacion juridica: documentacion, cargas y gravamenes",
+      "4. Reportaje profesional: fotografia, video y edicion",
+      "5. Virtual Home Staging en las areas con mayor potencial",
+      "6. Base de datos propia de clientes potenciales interesados en VPO",
+      "7. Publicacion del anuncio en portales y web propia",
+      "8. Organizacion y realizacion de visitas",
+      "9. Negociacion del precio, busqueda de financiacion y contrato de arras",
+      "10. Preparacion de la firma y asistencia a notaria"
+    ],
+
+    "proceso_descalificacion": [
+      "Consulta gratuita a la Direccion General de Vivienda y Rehabilitacion para conocer tipologia y plazos de proteccion",
+      "Devolucion de ayudas: se asiste en los pagos. Si no procede, este paso se omite",
+      "Resolucion oficial de la Direccion General adjuntando resguardos de cada organismo",
+      "Inscripcion en el Registro de la Propiedad, presentando el modelo 600 aunque este exento, para optimizar tiempos",
+      "Nota simple actualizada que acredita que la vivienda es libre",
+      "Ya se puede vender a precio libre de mercado. Se aconseja iniciar la gestion de venta EN PARALELO a la descalificacion",
+      "Si la vivienda no se ha podido descalificar, se vende a precio maximo legal usando la base de compradores de vivienda protegida"
+    ],
+
+    "calculo_del_vmlv": {
+      "metodo_tabla": "Correlaciona el precio maximo por metro cuadrado util de la zona (municipio) con el tipo de proteccion de la vivienda",
+      "metodo_formula": "Solo cuando esta acogido al Real Decreto 801/2005. Tiene en cuenta el precio de adquisicion SIN IVA, el IPC desde la primera adquisicion hasta la fecha de venta, y la segunda plaza de garaje se calcula por tabla",
+      "nota": "En ocasiones la determinacion se hace por enfoques distintos a formulas y tablas convencionales"
+    },
+
+    "activos_que_no_aparecen_en_la_web": [
+      "Comerciales NATIVOS en chino, ruso e ingles. Equipo multicultural con especialistas en mercado asiatico y ruso, que conocen los codigos culturales y las estrategias de negociacion de la demanda internacional.",
+      "Base de datos propia de compradores potenciales interesados en VIVIENDA PROTEGIDA, que acelera la venta",
+      "Base de datos de COMPRADORES EXTRANJEROS",
+      "Colaboracion con 8 entidades financieras que pueden ofrecer al comprador prestamo hipotecario del 100 por cien",
+      "823.000 visitas en la web en 2025",
+      "Mas de 2.500 gestiones exitosas desde 2013",
+      "Garantia comercial: si la venta se cae, se busca otro comprador por los mismos 2.950 EUR, gestionando la venta desde cero",
+      "Buzoneo en papel como canal activo de captacion"
+    ],
+
+    "posicionamiento_interno": "Los dossieres se declaran 'consultora inmobiliaria LIDER en el mercado de viviendas protegidas en Madrid'. La frase de marca interna es: 'En un sector que cambia cada dia, no solo abrazamos el cambio: lo lideramos'.",
+
+    "contradicciones_a_resolver": [
+      "MODELO DE PAGO: RESUELTO el 4 de septiembre de 2026. No hay contradiccion real, hay dos servicios distintos. La venta de inmueble NUNCA se fracciona ni se cobra por adelantado: solo se cobra si se vende. Lo de los honorarios fraccionados pertenece al dossier de CIERRE DE COMPRAVENTA, que es un servicio aparte de preparacion documental. Los tramites (descalificacion, autorizacion e informe) si se cobran por adelantado. Riesgo remanente: un cliente que lea los dos dossieres puede ver una contradiccion aparente, asi que conviene que cada dossier diga a que servicio se refiere su modelo de cobro.",
+      "CIFRAS DE VOLUMEN. Circulan cuatro: 'mas de 1.000 compraventas' (home), 'mas de 900 operaciones' (paginas internas), 'mas de 2.500 gestiones' (dossieres) y 'mas de 100 ventas de VPO al ano'. Probablemente miden cosas distintas (compraventas frente a gestiones totales), pero conviene fijar una definicion y usarla igual en todas partes.",
+      "PLAZO DE DESCALIFICACION. El dossier dice 45 dias habiles; la pagina /nuestros-servicios/ dice 3 meses; la pagina /vpo/ dice 45 dias. Hay que unificar.",
+      "RESENAS. El dossier muestra 4,8 con 602; la web tiene hoy 683. El material comercial va por detras."
+    ]
+  },
+
+  "hipotesis": [
+    { "hipotesis": "El alquiler no es linea de negocio", "base": "No existe pagina de servicio ni URL de alquiler en el sitemap", "confirmar": "Puede que lo hagais sin publicarlo" },
+    { "hipotesis": "HubSpot no esta implantado como CRM central", "base": "No se detecta seguimiento de HubSpot en el codigo de la home, pese a estar conectado en las herramientas de Alberto", "confirmar": "Puede estar en uso interno sin pixel en la web, o a medio implantar" },
+    { "hipotesis": "La captacion de pago se concentra en Google Ads", "base": "Hay AW- con conversiones, pero no se detecta pixel de Meta ni de LinkedIn", "confirmar": "Puede haber campanas en Meta sin pixel instalado" },
+    { "hipotesis": "El podcast y el video son iniciativa de marketing interna y no estan medidos como canal de captacion", "base": "Estan enlazados desde la home pero no hay embudo asociado", "confirmar": "" },
+    { "hipotesis": "El comprador es publico secundario deliberado, no un descuido", "base": "Existe catalogo y asesoria de compra de pago, pero sin lead magnets ni embudo comparable", "confirmar": "" }
+  ],
+
+  "solo_tu_lo_sabes": {
+    "_nota": "Ninguna investigacion externa puede rellenar esto. Son las preguntas cuya respuesta mas mejora el filtro del briefing. Contesta con frases cortas; no hace falta redactar.",
+    "herramientas_que_pagamos_y_usamos_a_diario": "",
+    "herramientas_que_pagamos_y_casi_no_usamos": "",
+    "que_probamos_y_descartamos_y_por_que": "",
+    "que_procesos_nos_duelen_hoy": "",
+    "que_hace_una_persona_a_mano_que_se_repite_cada_semana": "",
+    "cuanto_tiempo_se_va_en_cada_uno": "",
+    "que_intentamos_automatizar_y_fallo": "",
+    "presupuesto_realista_para_herramientas_nuevas": "",
+    "quien_decide_una_compra_de_software": "",
+    "que_departamentos_queremos_incorporar_y_en_que_orden": "",
+    "restricciones_que_no_podemos_saltarnos": "",
+    "objetivo_de_negocio_de_los_proximos_12_meses": ""
+  }
+}
